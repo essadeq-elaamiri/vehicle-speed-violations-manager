@@ -24,12 +24,12 @@ public class RadarQueryHandlerService {
     private RadarRepository radarRepository;
 
     @QueryHandler
-    public List<Radar> on(GetAllRadarsQuery query){
+    public List<Radar> handle(GetAllRadarsQuery query){
         return radarRepository.findAll();
     }
 
     @QueryHandler
-    public Radar on(GetRadarByIdQuery query){
+    public Radar handle(GetRadarByIdQuery query){
         return radarRepository.findById(query.getRadarId()).orElseThrow(()-> new RadarNotFoundException(String.format("Radar with ID [%s] not found.", query.getRadarId())));
     }
 }

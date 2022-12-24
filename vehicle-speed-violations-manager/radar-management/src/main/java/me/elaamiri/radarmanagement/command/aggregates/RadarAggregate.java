@@ -9,7 +9,7 @@ import me.elaamiri.events.radarEvents.RadarCreatedEvent;
 import me.elaamiri.events.radarEvents.RadarDeletedEvent;
 import me.elaamiri.events.radarEvents.RadarUpdatedEvent;
 import me.elaamiri.exceptions.NegativeSpeedException;
-import me.elaamiri.exceptions.UnvalidObjectId;
+import me.elaamiri.exceptions.InvalidObjectId;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -53,7 +53,7 @@ public class RadarAggregate {
     public void handle(UpdateRadarCommand command){
         log.info("Enter UpdateRadarCommand");
         // validations
-        if(command.getCommandId() == null || command.getCommandId().isBlank()) throw new UnvalidObjectId("ID is not valid.");
+        if(command.getCommandId() == null || command.getCommandId().isBlank()) throw new InvalidObjectId("ID is not valid.");
         if(command.getVitesse_max()<0) throw new NegativeSpeedException("Speed can not be negative");
         AggregateLifecycle.apply(new RadarUpdatedEvent(
                 command.getCommandId(), command.getVitesse_max(), command.getLongitude(), command.getLatitude()

@@ -10,6 +10,7 @@ import me.elaamiri.dtos.ownerDtos.CreateOwnerRequestDTO;
 import me.elaamiri.dtos.ownerDtos.UpdateOwnerRequestDTO;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventsourcing.eventstore.EventStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @RequestMapping("commands/owner")
 public class OwnerCommandController {
+    @Autowired
     private CommandGateway commandGateway;
     private EventStore eventStore;
 
@@ -42,6 +44,8 @@ public class OwnerCommandController {
 
     @PutMapping("/update/{id}")
     public CompletableFuture<String> updateOwner(@RequestBody UpdateOwnerRequestDTO updateOwnerRequestDTO, @PathVariable String id){
+        log.error(id);
+        log.error(updateOwnerRequestDTO.toString());
         CompletableFuture<String> response = commandGateway.send(new UpdateOwnerCommand(
                 id,
                 updateOwnerRequestDTO.getName(),

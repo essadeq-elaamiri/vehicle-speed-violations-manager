@@ -5,16 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import me.elaamiri.commands.ownerCommands.CreateOwnerCommand;
 import me.elaamiri.commands.ownerCommands.DeleteOwnerCommand;
 import me.elaamiri.commands.ownerCommands.UpdateOwnerCommand;
-import me.elaamiri.commands.radarCommands.DeleteRadarCommand;
 import me.elaamiri.events.ownerEvents.OwnerCreatedEvent;
 import me.elaamiri.events.ownerEvents.OwnerDeletedEvent;
 import me.elaamiri.events.ownerEvents.OwnerUpdatedEvent;
-import me.elaamiri.events.radarEvents.RadarDeletedEvent;
+import me.elaamiri.exceptions.InvalidObjectId;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import java.util.Date;
@@ -32,6 +30,7 @@ public class OwnerAggregate {
     @Getter
     private String email;
 
+
     public OwnerAggregate() {
     }
 
@@ -39,7 +38,8 @@ public class OwnerAggregate {
     public OwnerAggregate(CreateOwnerCommand command) {
 
         /* TODO: validations (Name, date email ...)*/
-        log.info(command.toString());
+        //log.info(command.toString());
+        if(command.getCommandId() == null || command.getCommandId().isBlank()) throw new InvalidObjectId("Id can not be null.");
         AggregateLifecycle.apply(new OwnerCreatedEvent(
                 command.getCommandId(),
                 command.getName(),
@@ -59,13 +59,14 @@ public class OwnerAggregate {
 
     @CommandHandler
     public void handle(UpdateOwnerCommand command){
+        log.error(command.getCommandId());
+        if(command.getCommandId() == null || command.getCommandId().isBlank()) throw new InvalidObjectId("Id can not be null.");
         // validations
         AggregateLifecycle.apply(new OwnerUpdatedEvent(
                 command.getCommandId(),
                 command.getName(),
                 command.getBirthDate(),
                 command.getEmail()
-
         ));
 
         /* TODO: validate if the radar exists*/
