@@ -8,10 +8,7 @@ import me.elaamiri.queries.infractionQueries.GetAllInfractionsQuery;
 import me.elaamiri.queries.infractionQueries.GetInfractionByIdQuery;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +17,7 @@ import java.util.concurrent.CompletableFuture;
 @AllArgsConstructor
 @Slf4j
 @RequestMapping("/query/infractions")
+@CrossOrigin("*")
 public class infractionQueryController {
     private QueryGateway queryGateway;
 

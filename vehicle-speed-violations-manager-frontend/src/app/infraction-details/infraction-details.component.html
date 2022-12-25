@@ -1,0 +1,105 @@
+<div class="container">
+    <ol class="breadcrumb mt-4">
+        <li class="breadcrumb-item " aria-current="page">Infractions</li>
+        <li class="breadcrumb-item " aria-current="page">{{infractionId}}</li>
+        <li class="breadcrumb-item active" aria-current="page">Details</li>
+    </ol>
+    
+    <h2 class="my-5" >Infraction Details</h2>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card mb-5" *ngIf="infractionDetails" >
+                <div class="card-header">
+                    <h3>Infraction</h3>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1465/1465128.png" class="rounded" width="82px">
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    
+                  <li class="list-group-item">
+                    <b>ID: </b>
+                    {{infractionDetails.id}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Date: </b>
+                    {{infractionDetails.date | date:'short' }}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Vitesse: </b>
+                    {{infractionDetails.vitesse}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Montant: </b>
+                    {{infractionDetails.montant}} MAD
+                  </li>
+                  
+                </ul>
+              </div>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col">
+            <div class="card mb-5" *ngIf="infractionDetails.radar" >
+                <div class="card-header">
+                  <h3>Radar</h3>
+                  <img src="https://cdn-icons-png.flaticon.com/512/1565/1565840.png" class="rounded" width="60px">
+                </div>
+                <ul class="list-group list-group-flush">
+                    
+                  <li class="list-group-item">
+                    <b>ID: </b>
+                    {{infractionDetails.radar.radarId}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Long: </b>
+                    {{infractionDetails.radar.longitude}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Lat: </b>
+                    {{infractionDetails.radar.latitude}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Vitesse maximale: </b>
+                    {{infractionDetails.radar.vitesse_max}}
+                  </li>
+                </ul>
+              </div>
+        </div>
+        <div class="col">
+            <div class="card mb-5" *ngIf="infractionDetails" >
+                <div class="card-header">
+                  <h3>Vehicle</h3> 
+                  <img src="https://cdn-icons-png.flaticon.com/512/3097/3097144.png" class="rounded" width="80px">
+                </div>
+                <ul class="list-group list-group-flush">
+                    
+                  <li class="list-group-item">
+                    <b>ID: </b>
+                    {{infractionDetails.vehicle.id}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Numéro de matricule: </b>
+                    {{infractionDetails.vehicle.mum_matricule}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Marque: </b>
+                    {{infractionDetails.vehicle.marque}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Model: </b>
+                    {{infractionDetails.vehicle.model}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Puissance fiscale: </b>
+                    {{infractionDetails.vehicle.puissance_fiscal}}
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </div>
+    
+    
+</div>
