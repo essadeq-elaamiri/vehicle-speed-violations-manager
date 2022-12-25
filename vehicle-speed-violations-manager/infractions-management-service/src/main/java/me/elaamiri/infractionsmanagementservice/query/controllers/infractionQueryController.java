@@ -2,6 +2,7 @@ package me.elaamiri.infractionsmanagementservice.query.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.elaamiri.infractionsmanagementservice.query.dtos.FullInfractionResponseDTO;
 import me.elaamiri.infractionsmanagementservice.query.entities.Infraction;
 import me.elaamiri.queries.infractionQueries.GetAllInfractionsQuery;
 import me.elaamiri.queries.infractionQueries.GetInfractionByIdQuery;
@@ -29,8 +30,8 @@ public class infractionQueryController {
 
 
     @GetMapping("/{id}")
-    public Infraction getInfractionById(@PathVariable String id){
-        return queryGateway.query(new GetInfractionByIdQuery(id), ResponseTypes.instanceOf(Infraction.class)).join();
+    public FullInfractionResponseDTO getInfractionById(@PathVariable String id){
+        return queryGateway.query(new GetInfractionByIdQuery(id), ResponseTypes.instanceOf(FullInfractionResponseDTO.class)).join();
     }
 
 }
