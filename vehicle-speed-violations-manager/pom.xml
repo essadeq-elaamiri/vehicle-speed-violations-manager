@@ -46,6 +46,9 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Gateway -->
+
+
 		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-spring-boot-starter</artifactId>
